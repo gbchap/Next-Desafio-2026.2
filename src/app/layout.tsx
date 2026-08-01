@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Abhaya_Libre } from "next/font/google";
+import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre} from "next/font/google";
 import "./globals.css";
 
 
@@ -8,6 +7,13 @@ const abhaya_libre = Abhaya_Libre({
   subsets: ["latin"],
   weight: ["600"], 
   variable: "--font-abhaya",
+})
+
+
+const nunito_sans = Nunito_Sans({
+  subsets: ["latin"],
+  weight: ["600"], 
+  variable: "--font-nunito",
 })
 
 

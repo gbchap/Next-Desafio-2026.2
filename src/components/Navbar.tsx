@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
-import Image from "next/image"
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const linkStyle = "font-abhaya text-deepgreen hover:text-pink-700 text-xl transition-colors";
@@ -59,24 +59,24 @@ export default function Navbar(){
             </div>
             {isOpen && (
                 <ul className="md:hidden fixed inset-0 bg-pinkish flex flex-col items-center justify-center gap-8">
-                <li>
-                    <Link href="/home" className={mobileLinkClass("/home")}>HOME</Link>
-                </li>
-                <li>
-                    <Link href="/contato" className={mobileLinkClass("/contato")}>CONTATO</Link>
-                </li>
-                <li>
-                    <Link href="/produtos" className={mobileLinkClass("/produtos")}>PRODUTOS</Link>
-                </li>
-                <li>
-                    <Link href="/gerenciamento" className={mobileLinkClass("/gerenciamento")}>GERENCIAMENTO</Link>
-                </li>
-                <li>
-                    <Link href="/login" className={mobileLinkClass("/login")}>LOGIN</Link>
-                </li>
-                <li>
-                    <Link href="/carrinho" className={mobileLinkClass("/carrinho")}>CARRINHO</Link>
-                </li>
+                    <li>
+                        <Link href="/home" className={mobileLinkClass("/home")}>HOME</Link>
+                    </li>
+                    <li>
+                        <Link href="/contato" className={mobileLinkClass("/contato")}>CONTATO</Link>
+                    </li>
+                    <li>
+                        <Link href="/produtos" className={mobileLinkClass("/produtos")}>PRODUTOS</Link>
+                    </li>
+                    <li>
+                        <Link href="/gerenciamento" className={mobileLinkClass("/gerenciamento")}>GERENCIAMENTO</Link>
+                    </li>
+                    <li>
+                        <Link href="/login" className={mobileLinkClass("/login")}>LOGIN</Link>
+                    </li>
+                    <li>
+                        <Link href="/carrinho" className={mobileLinkClass("/carrinho")}>CARRINHO</Link>
+                    </li>
                 </ul>
             )}
         </nav>

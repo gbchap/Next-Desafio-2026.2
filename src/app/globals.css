@@ -4,6 +4,8 @@
     --color-pinkish: #EAD1C3;
     --color-base: #F6ECD8;
     --color-deepgreen: #0D261B;
+    --color-forestgreen: #1C3100;
 
     --font-abhaya: var(--font-abhaya);
+    --font-nunito: var(--font-nunito);
 }
