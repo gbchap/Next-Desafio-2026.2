@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Abhaya_Libre } from "next/font/google";
 import "./globals.css";
+
+
+const abhaya_libre = Abhaya_Libre({
+  subsets: ["latin"],
+  weight: ["600"], 
+  variable: "--font-abhaya",
+})
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${abhaya_libre.variable} antialiased`}
       >
         {children}
       </body>

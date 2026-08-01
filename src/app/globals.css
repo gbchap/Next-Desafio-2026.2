@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    --color-pinkish: #EAD1C3;
+    --color-base: #F6ECD8;
+    --color-deepgreen: #0D261B;
+
+    --font-abhaya: var(--font-abhaya);
+}
