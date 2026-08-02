@@ -3,14 +3,13 @@
 import Link from 'next/link';
 import Image from "next/image";
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
-import { useState } from "react";
 
 export default function Footer(){
-    const linkStyle = "font-nunito text-forestgreen hover:text-pink-500 text-lg transition-colors";
-    const mobileLinkClass = "font-nunito text-forestgreen hover:text-pink-500 text-sm transition-colors";
+    const linkStyle = "font-nunito text-forestgreen hover:text-pink-700 text-lg transition-colors";
+    const mobileLinkClass = "font-nunito text-forestgreen hover:text-pink-700 text-sm transition-colors";
 
     return (
-        <footer className="bg-linear-to-b from-base to-pinkish md:bg-base md:bg-none py-16">
+        <footer className="bg-linear-to-b from-base to-pinkish md:bg-base md:bg-none py-8">
             <div className="hidden md:flex items-center justify-around">  
                 <div className="flex flex-col items-start justify-start gap-6">
                     <Image src="/logochapterclub.png" alt="Logo" width={160} height={40}/>

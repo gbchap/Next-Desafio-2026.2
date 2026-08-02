@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre} from "next/font/google";
+import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre, Dancing_Script} from "next/font/google";
 import "./globals.css";
 
 
@@ -9,6 +9,10 @@ const abhaya_libre = Abhaya_Libre({
   variable: "--font-abhaya",
 })
 
+const dancing_script = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-dancing",
+})
 
 const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
@@ -40,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${abhaya_libre.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${abhaya_libre.variable} ${nunito_sans.variable} ${dancing_script.variable} antialiased`}
       >
         {children}
       </body>
