@@ -32,6 +32,7 @@ const livrosLinha2 = [
   { id: "6", titulo: "Os Sete Maridos de Evelyn Hugo", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     preco: "R$ 49,90", imagem: "/maridos.jpg" },
 ];
+
 export default function Home() {
   return (
     <main className="bg-base md:bg-none py-8">

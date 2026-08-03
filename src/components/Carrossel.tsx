@@ -20,7 +20,11 @@ function useIsMobile(){
         const checarTam = () => setIsMobile(window.innerWidth < 768);
         checarTam();
         window.addEventListener("resize", checarTam);
-        return () => window.removeEventListener("resize", checarTam);
+        window.addEventListener("orientationchange", checarTam);
+        return () => {
+            window.removeEventListener("resize", checarTam);
+            window.removeEventListener("orientationchange", checarTam);
+        }
     }, []);
 
     return isMobile;

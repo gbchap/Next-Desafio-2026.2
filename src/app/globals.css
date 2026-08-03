@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
     --color-pinkish: #EAD1C3;
     --color-base: #F6ECD8;
     --color-deepgreen: #0D261B;
@@ -9,4 +9,5 @@
     --font-abhaya: var(--font-abhaya);
     --font-nunito: var(--font-nunito);
     --font-dancing: var(--font-dancing);
+    --font-roboto: var(--font-roboto);
 }

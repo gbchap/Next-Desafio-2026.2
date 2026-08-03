@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre, Dancing_Script} from "next/font/google";
+import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre, Dancing_Script, Roboto} from "next/font/google";
 import "./globals.css";
 
 
@@ -18,6 +18,11 @@ const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
   weight: ["600"], 
   variable: "--font-nunito",
+})
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  variable: "--font-roboto",
 })
 
 
@@ -44,7 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${abhaya_libre.variable} ${nunito_sans.variable} ${dancing_script.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} 
+        ${abhaya_libre.variable} ${nunito_sans.variable} ${dancing_script.variable} ${roboto.variable} bg-base antialiased`}
       >
         {children}
       </body>
