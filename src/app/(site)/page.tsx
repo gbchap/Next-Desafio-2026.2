@@ -1,39 +1,23 @@
 import Image from "next/image";
 import Link from 'next/link';
 import Carrossel from "@/components/Carrossel";
+import prisma from "@/lib/db";
 
+export default async function Home() {
+  const todosLivros = await prisma.product.findMany({ take: 12 });
 
-const livrosLinha1 = [
-  { id: "1", titulo: "Casas Estranhas", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 45,90", imagem: "/casasEstranhas.jpg" },
-  { id: "2", titulo: "Confiança", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-    preco: "R$ 52,00", imagem: "/Confianca.jpg" },
-  { id: "3", titulo: "Diário 3", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-     preco: "R$ 36,50", imagem: "/diario3.jpg" },
-  { id: "4", titulo: "Yellowface", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/impostora.jpg" },
-  { id: "5", titulo: "A Redoma de Vidro", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/Redoma.jpg" },
-  { id: "6", titulo: "Os Sete Maridos de Evelyn Hugo", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/maridos.jpg" },
-];    
+  const livrosFormatados = todosLivros.map((produto) => ({
+    id: String(produto.id),
+    title: produto.title,
+    description: produto.description,
+    price: `R$ ${produto.price.toFixed(2)}`,
+    imageURL: produto.imageURL || "/placeholder-livro.jpg",
+  }));
 
-const livrosLinha2 = [
-  { id: "7", titulo: "Não Há Divisão Antimemética", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 45,90", imagem: "/NaoHaDivisaoAntimemetica.jpg" },
-  { id: "8", titulo: "O Conto da Aia", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 53,00", imagem: "/oContoDaAia.jpg" },
-  { id: "9", titulo: "1984", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 38,50", imagem: "/1984.jpg" },
-  { id: "4", titulo: "Yellowface", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/impostora.jpg" },
-  { id: "5", titulo: "A Redoma de Vidro", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/Redoma.jpg" },
-  { id: "6", titulo: "Os Sete Maridos de Evelyn Hugo", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/maridos.jpg" },
-];
-
-export default function Home() {
+  const metade = Math.ceil(livrosFormatados.length / 2);
+  const fileira1 = livrosFormatados.slice(0, metade);
+  const fileira2 = livrosFormatados.slice(metade);
+  
   return (
     <main className="bg-base md:bg-none py-8">
       <div className="hidden md:flex flex-row items-center justify-around">
@@ -94,7 +78,7 @@ export default function Home() {
 
       {/* ---------------carrossel---------------------------------------*/}    
       <div className="mb-12">
-        <Carrossel fileira1={livrosLinha1} fileira2={livrosLinha2}/>
+        <Carrossel fileira1={fileira1} fileira2={fileira2} />
       </div>
       {/* -----------------carrossel-------------------------------------*/}
 

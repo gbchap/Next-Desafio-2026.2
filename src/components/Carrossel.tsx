@@ -7,10 +7,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Livro = {
     id: string;
-    titulo: string;
-    desc: string;
-    preco: string;
-    imagem: string;
+    title: string;
+    description: string;
+    price: string;
+    imageURL: string;
 };
 
 function useIsMobile(){
@@ -66,17 +66,17 @@ function FileiraCarrossel({livros}: {livros: Livro[]}) {
                     <div key={livro.id} className="flex flex-row items-center gap-4 w-80">
                         <div className="relative w-35 h-50 shrink-0">
                             <Image
-                                src={livro.imagem}
-                                alt={livro.titulo}
+                                src={livro.imageURL}
+                                alt={livro.title}
                                 width={140}
                                 height={200}
                                 className="object-cover rounded-md"
                             />
                         </div>
                         <div key={livro.id} className="flex flex-col items-start justify-start gap-4">
-                            <p className="text-sm font-semibold text-forestgreen line-clamp-3 mt-1">{livro.titulo}</p>
-                            <p className="text-xs text-forestgreen line-clamp-4">{livro.desc}</p>
-                            <p className="font-nunito text-forestgreen text-sm">{livro.preco}</p>
+                            <p className="text-sm font-semibold text-forestgreen line-clamp-3 mt-1">{livro.title}</p>
+                            <p className="text-xs text-forestgreen line-clamp-4">{livro.description}</p>
+                            <p className="font-nunito text-forestgreen text-sm">{livro.price}</p>
                             <button
                                 onClick={() => console.log("adicionar ao carrinho:", livro.id)}
                                 className="font-nunito bg-forestgreen text-base text-xs px-4 py-1.5 rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">

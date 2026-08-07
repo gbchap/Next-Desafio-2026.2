@@ -19,5 +19,8 @@ model Product {
   title       String
   description String
   price       Float
+  editor      String?
+  gender      String?
+  imageURL    String?
   createdAt   DateTime @default(now())
 }

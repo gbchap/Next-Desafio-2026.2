@@ -1,43 +1,27 @@
-'use client';
-
 import Image from "next/image";
-import Link from 'next/link';
-import Carrossel from "@/components/Carrossel";
-import { IoIosSearch } from "react-icons/io";
+import prisma from "@/lib/db";
+import SearchBar from "@/components/SearchBar";
+import ProdutoCard from "@/components/ProdutoCard";
 
+export default async function productPage({
+        searchParams,
+    }: {
+        searchParams: Promise<{ query?: string; page?: string }>;
+    }) {
+        const params = (await searchParams) ?? {};
+        const query = params.query || '';
 
-const livrosLinha1 = [
-  { id: "1", titulo: "Casas Estranhas", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 45,90", imagem: "/casasEstranhas.jpg" },
-  { id: "2", titulo: "Confiança", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-    preco: "R$ 52,00", imagem: "/Confianca.jpg" },
-  { id: "3", titulo: "Diário 3", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-     preco: "R$ 36,50", imagem: "/diario3.jpg" },
-  { id: "4", titulo: "Yellowface", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/impostora.jpg" },
-  { id: "5", titulo: "A Redoma de Vidro", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/Redoma.jpg" },
-  { id: "6", titulo: "Os Sete Maridos de Evelyn Hugo", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/maridos.jpg" },
-];    
+        const produtos = await prisma.product.findMany({
+            where: query
+                ? {
+                    title: {
+                        contains: query,
+                        mode: 'insensitive',
+                    },
+                }
+                : undefined,
+        });
 
-const livrosLinha2 = [
-  { id: "7", titulo: "Não Há Divisão Antimemética", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 45,90", imagem: "/NaoHaDivisaoAntimemetica.jpg" },
-  { id: "8", titulo: "O Conto da Aia", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 53,00", imagem: "/oContoDaAia.jpg" },
-  { id: "9", titulo: "1984", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 38,50", imagem: "/1984.jpg" },
-  { id: "4", titulo: "Yellowface", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/impostora.jpg" },
-  { id: "5", titulo: "A Redoma de Vidro", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/Redoma.jpg" },
-  { id: "6", titulo: "Os Sete Maridos de Evelyn Hugo", desc:"orem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    preco: "R$ 49,90", imagem: "/maridos.jpg" },
-];
-
-
-export default function productPage() {
     return(
         <section className="bg-base">
             <section className="bg-[url('/fundoverdeesc.png')] bg-cover bg-center bg-no-repeat py-12 md:py-24">
@@ -46,22 +30,14 @@ export default function productPage() {
                         <p className="text-pinkish font-roboto font-bold text-2xl">
                             Encontre seu Favorito!
                         </p>
-                        <div className="items-center flex justify-start">
-                            <div className="relative flex items-center">
-                                <input
-                                    type="text"
-                                    className="peer block p-2 pl-10 w-160 text-forestgreen bg-base rounded-lg border border-forestgreen focus:pl-3"
-                                    placeholder="Pesquisar"
-                                />
-                                <div className="absolute top-3 left-3 items-center peer-focus:opacity-0 transition-opacity duration-50">
-                                    <IoIosSearch className="text-forestgreen" size={16} />
-                                </div>
-                            </div>
+                        <div className="items-center flex justify-start w-full max-w-xl">
+                            <SearchBar />
                         </div>
                     </div>
-                    <Image src="/logochapterclub.png" alt="Logo" width={420} height={40}/>
+                    <div className="flex-col items-center justify-center gap-2">
+                        <Image src="/logochapterclub.png" alt="Logo" width={420} height={40}/>
+                    </div>
                 </div>
-
                 {/* ---------------------------RESPONSIVIDADE--------------------------- */}
                 <div className="md:hidden flex-row items-center justify-around px-12">
                     <div className="flex-col items-start justify-around gap-4">
@@ -70,14 +46,7 @@ export default function productPage() {
                         </div>
                         <p className="text-pinkish font-roboto text-ms">Encontre seu Favorito!</p>
                         <div className="relative flex items-center w-full max-w-xs">
-                            <input
-                                type="text"
-                                className="peer block p-2 pl-10 w-full text-forestgreen bg-base rounded-lg border border-forestgreen focus:pl-3"
-                                placeholder="Pesquisar"
-                            />
-                            <div className="absolute top-3 left-3 items-center peer-focus:opacity-0 transition-opacity duration-50">
-                                <IoIosSearch className="text-forestgreen" size={16} />
-                            </div>
+                            <SearchBar />
                         </div>
                     </div>    
                 </div>
@@ -85,14 +54,18 @@ export default function productPage() {
             </section>
 
             <section className="bg-base flex-row items-center justify-center">
-                <div className="flex items-center justify-center mt-12 md:mt-24">
+                <div className="flex items-center justify-center mt-12 md:mt-24 md:mb-12">
                     <p className="text-forestgreen font-dancing font-semibold text-6xl">
                     Mais Populares
                     </p>
                 </div>
 
                 <div className="mb:mt-12">
-                    <Carrossel fileira1={livrosLinha1} fileira2={livrosLinha2}/>
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-32 px-4 md:px-8 py-12">
+                        {produtos.map((produto) => (
+                            <ProdutoCard key={produto.id} produto={produto} />
+                        ))} 
+                    </div>
                 </div>
             </section>
         </section>
