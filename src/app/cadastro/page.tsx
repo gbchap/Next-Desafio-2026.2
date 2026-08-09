@@ -48,14 +48,14 @@ export default function CadastroPage() {
     }
 
     return (
-        <section className="bg-pinkish min-h-screen flex flex-col md:flex-row items-center justify-center gap-8 px-4">
+        <section className="bg-pinkish min-h-screen flex flex-col md:flex-row items-center justify-center gap-28 px-4">
             <div className="flex flex-col items-center justify-center gap-8">
                 <Link href="/" className="absolute top-8 left-8 font-nunito">
-                    <FaChevronLeft className="text-forestgreen hover:text-pink-900 transition-colors" size={24}/>
+                    <FaChevronLeft className="text-softgreen hover:text-pink-900 transition-colors" size={24}/>
                 </Link>
 
                 <div className="p-8 w-full max-w-sm mx-auto">
-                    <p className="text-pink-900 font-nunito text-3xl mt-12 mb-6">Faça seu Cadastro!</p>
+                    <p className="text-pink-900 font-nunito text-3xl mt-12 mb-6">Faça seu Cadastro! {'<3'}</p>
 
                     <div className="md:hidden relative w-full h-64 rounded-2xl overflow-hidden mb-6">
                         <Image
@@ -101,7 +101,7 @@ export default function CadastroPage() {
                         <button
                             type="submit"
                             disabled={carregando}
-                            className="font-nunito bg-forestgreen text-base text-sm px-4 py-2 rounded-full hover:bg-base hover:text-forestgreen transition-colors cursor-pointer disabled:opacity-50 mt-4"
+                            className="font-nunito bg-softgreen text-base text-sm px-4 py-2 rounded-lg hover:bg-base hover:text-forestgreen transition-colors cursor-pointer disabled:opacity-50 mt-4"
                         >
                             {carregando ? "Cadastrando..." : "Cadastrar"}
                         </button>
