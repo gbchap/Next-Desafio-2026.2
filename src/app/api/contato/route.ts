@@ -15,7 +15,7 @@ export async function POST(request: Request) {
         }
         await resend.emails.send({
             from: 'Chapter Club <onboarding@resend.dev>',
-            to: 'gb.freitaschap@gmail.com',
+            to: process.env.RESEND_TO_EMAIL!,
             subject: `[Contato] ${assunto}`,
             replyTo: email,
             html: `
