@@ -1,4 +1,5 @@
 import ProdutoCard from "@/components/ProdutoCard";
+import BotaoCarrinho from "@/components/BotaoCarrinho";
 import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -31,7 +32,7 @@ export default async function ProdutoPage({
 			</div>
         </div>
         <div className="flex flex-col gap-8">
-          	<h1 className="font-nunito text-forestgreen font-black text-4xl">{produto.title}</h1>
+          	<h1 className="font-nunito text-forestgreen font-bold text-4xl">{produto.title}</h1>
 			
 			<div>
 				<div className="flex items-center gap-2">
@@ -46,10 +47,7 @@ export default async function ProdutoPage({
 
           	<p className="font-nunito text-forestgreen font-bold text-2xl">R$ {produto.price.toFixed(2)}</p>
 
-			<button
-				className="font-nunito self-start bg-forestgreen text-base text-xl px-12 py-2 rounded-2xl hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
-				Adicionar ao Carrinho
-			</button>
+			<BotaoCarrinho produto={produto} />
 
 			<div className="flex flex-col gap-4">
 				<p className="font-nunito text-deepgreen text-xl font-black">RESUMO</p>

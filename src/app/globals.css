@@ -12,3 +12,7 @@
     --font-dancing: var(--font-dancing);
     --font-roboto: var(--font-roboto);
 }
+
+html, body {
+    overflow-x: hidden;
+}

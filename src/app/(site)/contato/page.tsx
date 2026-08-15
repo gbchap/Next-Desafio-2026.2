@@ -10,9 +10,9 @@ export default function ContatoPag() {
                 <div className="flex flex-row items-center justify-center py-16 md:py-24">
                     <p className="text-pinkish font-abhaya text-3xl md:text-5xl">Contate-nos</p>
                 </div>
-                <section className="bg-base rounded-xl mx-4 md:mx-40 mb-12 md:p-2">
+                <section className="bg-base rounded-xl mx-4 md:mx-16 lg:mx-40 mb-12 p-4 md:p-6">
                     <div className="flex flex-col md:flex-row gap-6 md:gap-2">
-                        <section className="bg-forestgreen rounded-xl w-full md:w-[85%] p-6 md:p-12 flex flex-col gap-6">
+                        <section className="bg-forestgreen rounded-xl w-full md:w-2/3 p-6 md:p-12 flex flex-col gap-6">
                             <div>
                                 <p className="text-base font-nunito text-2xl md:text-3xl">Informações de Contato</p>
                                 <p className="text-base font-nunito mt-4 md:mt-6 mb-6 md:mb-12">
@@ -35,7 +35,7 @@ export default function ContatoPag() {
                                 </li>
                             </ul>
 
-                            <div className="w-full h-64 md:h-64 rounded-xl overflow-hidden mt-4 md:mt-8">
+                            <div className="w-full h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden mt-4 md:mt-8">
                                 <iframe 
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54810.00660142576!2d-43.373137486068195!3d-21.762248147466092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x989b0d73aabbbb%3A0xb6ffa6ed3a5e43ac!2sIndepend%C3%AAncia%20Shopping!5e1!3m2!1spt-BR!2sbr!4v1786220779002!5m2!1spt-BR!2sbr" 
                                     width="100%"
@@ -66,7 +66,7 @@ export default function ContatoPag() {
                             </ul>
                         </section>
                     
-                        <div className="flex w-full justify-center items-center">
+                        <div className="flex w-full md:w-4/5 justify-center items-center p-4 md:p-6">
                             <FormularioContato />
                         </div>
                         

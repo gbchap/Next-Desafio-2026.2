@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans, Abhaya_Libre, Dancing_Script, Roboto} from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/context/CartContext";
 
 
 const abhaya_libre = Abhaya_Libre({
@@ -16,7 +17,7 @@ const dancing_script = Dancing_Script({
 
 const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
-  weight: ["600"], 
+  weight: ["300","600", "700", "800", "900"], 
   variable: "--font-nunito",
 })
 
@@ -52,7 +53,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} 
         ${abhaya_libre.variable} ${nunito_sans.variable} ${dancing_script.variable} ${roboto.variable} bg-base antialiased`}
       >
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

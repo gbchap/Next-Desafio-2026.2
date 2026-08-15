@@ -80,7 +80,7 @@ export default function LoginPage() {
                         disabled={carregando}
                         className="font-nunito bg-forestgreen text-base text-sm px-4 py-2 rounded-lg hover:bg-base hover:text-forestgreen transition-colors cursor-pointer disabled:opacity-50 mt-4"
                     >
-                        {carregando ? "Cadastrando..." : "Entrar"}
+                        {carregando ? "Entrando..." : "Entrar"}
                     </button>
 				</form>
 				<div className="flex items-center gap-4 my-6">

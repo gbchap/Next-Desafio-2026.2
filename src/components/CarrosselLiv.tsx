@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import BotaoCarrinho from "./BotaoCarrinho";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
@@ -63,7 +64,7 @@ function FileiraCarrossel({livros}: {livros: Livro[]}) {
                     isVisible ? "opacity-100" : "opacity-0"
                 }`}>
                 {livrosVisiveis.map((livro) => (
-                    <div key={livro.id} className="flex flex-row items-center gap-4 w-80">
+                    <div key={livro.id} className="flex flex-row items-center gap-4 w-full max-w-80">
                         <div className="relative w-35 h-50 shrink-0">
                             <Image
                                 src={livro.imageURL}
@@ -76,12 +77,15 @@ function FileiraCarrossel({livros}: {livros: Livro[]}) {
                         <div key={livro.id} className="flex flex-col items-start justify-start gap-4">
                             <p className="text-sm font-semibold text-forestgreen line-clamp-3 mt-1">{livro.title}</p>
                             <p className="text-xs text-forestgreen line-clamp-4">{livro.description}</p>
-                            <p className="font-nunito text-forestgreen text-sm">{livro.price}</p>
-                            <button
-                                onClick={() => console.log("adicionar ao carrinho:", livro.id)}
-                                className="font-nunito bg-forestgreen text-base text-xs px-4 py-1.5 rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
-                                Adicionar ao Carrinho
-                            </button>
+                            <p className="font-nunito text-forestgreen text-text-xs">{livro.price}</p>
+                            <BotaoCarrinho small
+                            produto={{
+                                id: Number(livro.id),
+                                title: livro.title,
+                                price: parseFloat(livro.price.replace('R$', '').replace(',', '.').trim()),
+                                imageURL: livro.imageURL,
+                            }} />
+                            
                         </div>
                     </div>
                 ))}
@@ -102,7 +106,7 @@ export default function Carrossel({
     fileira2: Livro[];
 }) {
     return(
-        <div className="flex flex-col gap-10 py-12 px-0 md:px-6">
+        <div className="flex flex-col gap-10 py-12 px-0 md:px-6 overflow-x-hidden">
             <FileiraCarrossel livros={fileira1} />
             <FileiraCarrossel livros={fileira2} />
         </div>

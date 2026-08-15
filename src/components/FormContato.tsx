@@ -45,8 +45,8 @@ export default function FormularioContato(){
 
     return(
 
-    <form onSubmit={handleSubmit} className="flex flex-col gap-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             <div className="flex flex-col gap-1">
                 <label htmlFor="nome" className="font-nunito text-forestgreen text-sm">Nome</label>
                 <input
@@ -54,7 +54,7 @@ export default function FormularioContato(){
                     name="nome"
                     type="text"
                     required
-                    className="bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-1 font-nunito text-forestgreen/60"
+                    className="w-full bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-2 sm:py-1 font-nunito text-forestgreen/60"
                 />
             </div>
             <div className="flex flex-col gap-1">
@@ -64,7 +64,7 @@ export default function FormularioContato(){
                     name="sobrenome"
                     type="text"
                     required
-                    className="bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-1 font-nunito text-forestgreen/60"
+                    className="w-full bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-2 sm:py-1 font-nunito text-forestgreen/60"
                 />
             </div>
             <div className="flex flex-col gap-1">
@@ -74,7 +74,7 @@ export default function FormularioContato(){
                     name="email"
                     type="email"
                     required
-                    className="bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-1 font-nunito text-forestgreen/60"
+                    className="w-full bg-transparent border-0 border-b border-forestgreen/40 focus:border-pink-400 outline-none py-2 sm:py-1 font-nunito text-forestgreen/60"
                 />
             </div>
             <div className="flex flex-col gap-1">
@@ -102,7 +102,7 @@ export default function FormularioContato(){
             <button
                 type="submit"
                 disabled={enviando}
-                className="font-nunito bg-forestgreen text-base text-sm px-4 py-2 rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer self-start disabled:opacity-50"
+                className="w-full sm:w-auto font-nunito bg-forestgreen text-base text-sm px-4 py-4 sm:py-2 rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer self-start disabled:opacity-50"
             >
                 {enviando ? "Enviando..." : "Enviar Mensagem"}
             </button>

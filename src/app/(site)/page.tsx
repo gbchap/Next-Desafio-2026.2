@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from 'next/link';
-import Carrossel from "@/components/Carrossel";
+import Carrossel from "@/components/CarrosselLiv";
 import prisma from "@/lib/db";
 
 export default async function Home() {
