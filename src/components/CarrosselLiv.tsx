@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import BotaoCarrinho from "./BotaoCarrinho";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 
 type Livro = {
@@ -65,27 +66,28 @@ function FileiraCarrossel({livros}: {livros: Livro[]}) {
                 }`}>
                 {livrosVisiveis.map((livro) => (
                     <div key={livro.id} className="flex flex-row items-center gap-4 w-full max-w-80">
-                        <div className="relative w-35 h-50 shrink-0">
+                        <Link href={`/produtos/${livro.id}`} className="relative w-35 h-50 shrink-0 block">
                             <Image
                                 src={livro.imageURL}
                                 alt={livro.title}
-                                width={140}
-                                height={200}
+                                fill
                                 className="object-cover rounded-md"
                             />
-                        </div>
-                        <div key={livro.id} className="flex flex-col items-start justify-start gap-4">
-                            <p className="text-sm font-semibold text-forestgreen line-clamp-3 mt-1">{livro.title}</p>
-                            <p className="text-xs text-forestgreen line-clamp-4">{livro.description}</p>
-                            <p className="font-nunito text-forestgreen text-text-xs">{livro.price}</p>
-                            <BotaoCarrinho small
-                            produto={{
+                        </Link>
+
+                        <div className="flex flex-col items-start justify-start gap-4">
+                            <Link href={`/produtos/${livro.id}`} className="flex flex-col gap-3">
+                                <p className="text-sm font-nunito font-bold text-forestgreen line-clamp-3 mt-1">{livro.title}</p>
+                                <p className="text-xs font-nunito text-forestgreen line-clamp-4">{livro.description}</p>
+                                <p className="text-sm font-nunito font-bold text-forestgreen">{livro.price}</p>
+                            </Link>
+
+                            <BotaoCarrinho small produto={{
                                 id: Number(livro.id),
                                 title: livro.title,
                                 price: parseFloat(livro.price.replace('R$', '').replace(',', '.').trim()),
                                 imageURL: livro.imageURL,
                             }} />
-                            
                         </div>
                     </div>
                 ))}
@@ -98,7 +100,7 @@ function FileiraCarrossel({livros}: {livros: Livro[]}) {
     );
 }
 
-export default function Carrossel({
+export default function CarrosselLiv({
     fileira1,
     fileira2,
 }: {

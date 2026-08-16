@@ -2,6 +2,9 @@ import Image from "next/image";
 import prisma from "@/lib/db";
 import SearchBar from "@/components/SearchBar";
 import ProdutoCard from "@/components/ProdutoCard";
+import Paginacao from "@/components/Paginacao";
+
+const ITENS_POR_PAGINA = 8;
 
 export default async function productPage({
         searchParams,
@@ -10,17 +13,27 @@ export default async function productPage({
     }) {
         const params = (await searchParams) ?? {};
         const query = params.query || '';
+        const paginaAtual = Number(params.page) || 1;
 
-        const produtos = await prisma.product.findMany({
-            where: query
-                ? {
-                    title: {
-                        contains: query,
-                        mode: 'insensitive',
-                    },
-                }
-                : undefined,
-        });
+        const where = query
+            ?{
+                title: {
+                    contains: query,
+                    mode: 'insensitive' as const,
+                },
+            }
+            : undefined;
+        
+        const [produtos, totalProdutos] = await Promise.all([
+            prisma.product.findMany({
+                where,
+                skip: (paginaAtual - 1) * ITENS_POR_PAGINA,
+                take: ITENS_POR_PAGINA,
+            }),
+            prisma.product.count({where}),
+        ]);
+
+        const totalPaginas = Math.ceil(totalProdutos / ITENS_POR_PAGINA);
 
     return(
         <section className="bg-base">
@@ -39,12 +52,12 @@ export default async function productPage({
                     </div>
                 </div>
                 {/* ---------------------------RESPONSIVIDADE--------------------------- */}
-                <div className="md:hidden flex-row items-center justify-around px-12">
-                    <div className="flex-col items-start justify-around gap-4">
+                <div className="md:hidden flex-row items-center justify-center px-12">
+                    <div className="flex-col items-center justify-center gap-4">
                         <div className="flex items-center justify-center m-8">
                             <Image src="/logochapterclub.png" alt="Logo" width={240} height={40}/>
                         </div>
-                        <p className="text-pinkish font-roboto text-ms">Encontre seu Favorito!</p>
+                        <p className="text-pinkish font-roboto font-bold text-ms">Encontre seu Favorito!</p>
                         <div className="relative flex items-center w-full max-w-xs">
                             <SearchBar />
                         </div>
@@ -61,12 +74,13 @@ export default async function productPage({
                 </div>
 
                 <div className="mb:mt-12">
-                    <div className="flex flex-wrap justify-center gap-4 md:gap-32 px-4 md:px-8 py-12">
+                    <div className="flex flex-wrap justify-center gap-16 md:gap-32 px-4 md:px-8 py-12">
                         {produtos.map((produto) => (
                             <ProdutoCard key={produto.id} produto={produto} />
                         ))} 
                     </div>
                 </div>
+                <Paginacao paginaAtual = {paginaAtual} totalPaginas={totalPaginas} />
             </section>
         </section>
     );

@@ -26,7 +26,7 @@ export default function SearchBar() {
                 type="text"
                 defaultValue={searchParams.get('query')?.toString()}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="peer block p-2 pl-12 w-full text-forestgreen bg-base rounded-lg border border-forestgreen focus:pl-3"
+                className="peer block p-2 pl-12 w-full text-forestgreen bg-base rounded-lg border border-forestgreen focus:pl-8"
                 placeholder="Pesquisar"
             />
             <div className="absolute top-3 left-3 items-center peer-focus:opacity-0 transition-opacity duration-50">

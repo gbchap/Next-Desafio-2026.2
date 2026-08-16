@@ -1,8 +1,8 @@
 import ProdutoCard from "@/components/ProdutoCard";
 import BotaoCarrinho from "@/components/BotaoCarrinho";
-import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+
 
 export default async function ProdutoPage({
       params,

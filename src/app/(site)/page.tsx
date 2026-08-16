@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from 'next/link';
-import Carrossel from "@/components/CarrosselLiv";
+import CarrosselLiv from "@/components/CarrosselLiv";
 import prisma from "@/lib/db";
 
 export default async function Home() {
@@ -78,7 +78,7 @@ export default async function Home() {
 
       {/* ---------------carrossel---------------------------------------*/}    
       <div className="mb-12">
-        <Carrossel fileira1={fileira1} fileira2={fileira2} />
+        <CarrosselLiv fileira1={fileira1} fileira2={fileira2} />
       </div>
       {/* -----------------carrossel-------------------------------------*/}
 
