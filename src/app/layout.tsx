@@ -26,7 +26,6 @@ const roboto = Roboto({
   variable: "--font-roboto",
 })
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

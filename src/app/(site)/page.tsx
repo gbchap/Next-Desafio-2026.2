@@ -40,6 +40,18 @@ export default async function Home() {
         </div>
         <Image src="/gatinho.png" alt="LogoGatinho" width={640} height={40}/>
       </div>
+
+
+      {/*---------------------------------------------------------------------------*/}
+        <section className="bg-sagegreen flex flex-col items-center mb-24 py-16 justify-center">
+          <p className="text-forestgreen font-nunito font-semibold text-5xl text-center">
+            જ⁀➴ Brindes da <span className="font-dancing font-bold text-pinkish text-6xl">primeira compra:</span> ✿
+          </p>
+          <p className="text-softgreen font-nunito font-semibold text-sm mt-4 mb-4"> {'('} a partir de R$500,00 ✧˖°. {')'}</p>
+          <Image src="/brinde.png" alt="brindes" width={840} height={40}/>
+        </section>
+      {/*---------------------------------------------------------------------------*/}
+          
       <div className="hidden md:flex flex-col items-start justify-center px-20 gap-6">
         <p className="text-forestgreen font-nunito font-bold text-2xl">
           Mais Vendidos
@@ -67,6 +79,7 @@ export default async function Home() {
           rounded-xl hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
           Ver produtos
         </Link>
+
         <div className="flex-col items-start mt-12">
             <p className="text-forestgreen font-nunito font-bold text-xl">
               Mais Vendidos
@@ -139,6 +152,7 @@ export default async function Home() {
             </section>
           </section>
         </div>
+      </section>
       {/* ---------------------------RESPONSIVIDADE--------------------------- */}
 
       <div className="md:hidden flex items-center justify-center mb-8">
@@ -196,7 +210,6 @@ export default async function Home() {
       </div>
 
       {/* ---------------------------RESPONSIVIDADE--fim------------------------- */}
-      </section>
     </main>
   );
 }
