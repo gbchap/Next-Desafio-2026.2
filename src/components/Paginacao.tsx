@@ -41,7 +41,7 @@ export default function Paginacao({
                 className="bg-pinkish rounded-full p-2 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Página seguinte"
             >   
-            <ChevronRight className="text-forestgreen" size={20} />
+            <ChevronRight className="text-forestgreen" size={20} /> 
 
             </button>
         </div>

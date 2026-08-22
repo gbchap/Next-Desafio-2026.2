@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import CarrosselLiv from "@/components/CarrosselLiv";
+import CarrosselPromo from "@/components/CarrosselPromo";
 import prisma from "@/lib/db";
 
 export default async function Home() {
@@ -17,174 +18,77 @@ export default async function Home() {
   const metade = Math.ceil(livrosFormatados.length / 2);
   const fileira1 = livrosFormatados.slice(0, metade);
   const fileira2 = livrosFormatados.slice(metade);
-  
+
   return (
     <main className="bg-base md:bg-none py-8">
-      <div className="hidden md:flex flex-row items-center justify-around">
-        <div className="flex flex-col items-start justify-start gap-8">
-          <p className="text-forestgreen font-nunito font-semibold text-4xl">
-            A vida não vem com manual,<br></br>mas pode vir com <span className="font-dancing text-5xl">livros</span>.
+      <div className="flex flex-col md:flex-row items-center justify-around gap-2 md:gap-32 px-6 md:px-16 md:py-8 text-left">
+        <div className="flex flex-col items-center md:items-start justify-start gap-4 md:gap-12 order-2 md:order-1">
+          <p className="text-forestgreen font-nunito font-semibold text-2xl md:text-4xl">
+            A vida não vem com manual,<br />mas pode vir com <span className="font-dancing text-3xl md:text-5xl">livros</span>.
           </p>
-          <p className="text-forestgreen font-nunito font-semibold text-xl">
-            um cantinho onde as páginas ganham vida e cada capa<br></br>
-            esconde um mundo esperando pra ser descoberto. esse<br></br>
-            espaço foi feito pra você se perder (e se encontrar) entre<br></br>
-            as estantes {'<3'}
-          </p>
-          <Link
-            href="/produtos"
-            className="bg-forestgreen text-base font-nunito font-bold px-8 py-3
-            rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
-            Ver produtos
-          </Link>
-        </div>
-        <Image src="/gatinho.png" alt="LogoGatinho" width={640} height={40}/>
-      </div>
-
-
-      {/*---------------------------------------------------------------------------*/}
-        <section className="bg-sagegreen flex flex-col items-center mb-24 py-16 justify-center">
-          <p className="text-forestgreen font-nunito font-semibold text-5xl text-center">
-            જ⁀➴ Brindes da <span className="font-dancing font-bold text-pinkish text-6xl">primeira compra:</span> ✿
-          </p>
-          <p className="text-softgreen font-nunito font-semibold text-sm mt-4 mb-4"> {'('} a partir de R$500,00 ✧˖°. {')'}</p>
-          <Image src="/brinde.png" alt="brindes" width={840} height={40}/>
-        </section>
-      {/*---------------------------------------------------------------------------*/}
-          
-      <div className="hidden md:flex flex-col items-start justify-center px-20 gap-6">
-        <p className="text-forestgreen font-nunito font-bold text-2xl">
-          Mais Vendidos
-        </p>
-      </div>
-
-      {/* ---------------------------RESPONSIVIDADE--------------------------- */}
-
-      <div className="md:hidden flex flex-col items-center">
-        <Image src="/gatinho.png" alt="LogoGatinho" width={240} height={40}/>
-      </div>
-      <div className="md:hidden flex flex-col items-start gap-4 px-12">
-        <p className="text-forestgreen font-nunito font-bold text-2xl">
-            A vida não vem com manual,<br></br>mas pode vir com <span className="font-dancing text-2xl">livros</span>.
-        </p>
-        <p className="text-forestgreen font-nunito text-sm py-2">
+          <p className="text-forestgreen font-nunito text-sm md:text-xl md:font-semibold">
             um cantinho onde as páginas ganham vida e cada capa
             esconde um mundo esperando pra ser descoberto. esse
             espaço foi feito pra você se perder (e se encontrar) entre
             as estantes {'<3'}
-        </p>
-        <Link
-          href="/produtos"
-          className="bg-forestgreen text-base font-nunito font-bold px-6 py-2
-          rounded-xl hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
-          Ver produtos
-        </Link>
+          </p>
+          <Link
+            href="/produtos"
+            className="bg-forestgreen text-base font-nunito font-bold px-6 py-2 md:px-8 md:py-3 mt-8
+            rounded-xl md:rounded-full hover:bg-pinkish hover:text-forestgreen transition-colors cursor-pointer">
+            Ver produtos
+          </Link>
+        </div>
 
-        <div className="flex-col items-start mt-12">
-            <p className="text-forestgreen font-nunito font-bold text-xl">
-              Mais Vendidos
-            </p>
-        </div> 
+        <Image
+          src="/gatinho.png"
+          alt="LogoGatinho"
+          width={600}
+          height={40}
+          className="order-1 md:order-2 w-60 md:w-auto h-auto"
+        />
       </div>
 
-      {/* ---------------------------RESPONSIVIDADE-fim-------------------------- */}
+      <div className="px-4 md:px-0 mt-12 md:mt-0">
+        <CarrosselPromo />
+      </div>
 
-      {/* ---------------carrossel---------------------------------------*/}    
-      <div className="mb-12">
+      <div className="flex flex-col items-center md:items-start justify-center px-6 md:px-20 gap-6 mt-12 md:mt-32">
+        <p className="text-forestgreen font-nunito font-bold text-xl md:text-2xl">
+          Mais Vendidos
+        </p>
+      </div>
+
+      <div className="mb-12 md:mb-24">
         <CarrosselLiv fileira1={fileira1} fileira2={fileira2} />
       </div>
-      {/* -----------------carrossel-------------------------------------*/}
 
-      <section className="bg-[url('/fundorosa.png')] bg-cover bg-center bg-no-repeat py-24">
+      <section className="bg-[url('/fundorosa.png')] bg-cover bg-center bg-no-repeat py-16 md:py-24 px-4 md:px-32">
 
-        <div className="hidden md:flex items-center justify-center mb-8">
-          <p className="text-forestgreen font-nunito font-semibold text-5xl">
-            ✦ Sobre <span className="font-dancing text-6xl">Nós</span> ✦
+        <div className="flex items-center justify-center mb-32">
+          <p className="text-forestgreen font-nunito font-semibold text-3xl md:text-5xl text-center">
+            ✦ Sobre <span className="font-dancing text-4xl md:text-6xl">Nós</span> ✦
           </p>
         </div>
 
-        <div className="hidden md:flex items-stretch justify-center gap-24">
+        <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-8 md:gap-24 m-12">
 
-          <section className="bg-base rounded-2xl p-8 my-12">
-            <section className="flex flex-col gap-6">
-              <h1 className="text-forestgreen font-nunito text-5xl">
-                01
-              </h1>
-              <h1 className="text-forestgreen font-nunito text-4xl">
-                Missão
-              </h1>
-              <p className="text-forestgreen font-nunito text-lg">
-                Levar histórias<br></br>novinhas até as mãos<br></br>certas,
-                com carinho e<br></br>curadoria em cada<br></br>escolha.
+          <section className="bg-base rounded-2xl p-8">
+            <section className="flex flex-col gap-4 md:gap-6">
+              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">01</h1>
+              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Missão</h1>
+              <p className="text-forestgreen font-nunito text-sm md:text-lg">
+                Levar histórias novinhas até as mãos certas,
+                com carinho e curadoria em cada escolha.
               </p>
             </section>
           </section>
 
-          <section className="bg-base rounded-2xl p-8 my-12">
-            <section className="flex flex-col gap-6">
-              <h1 className="text-forestgreen font-nunito text-5xl">
-                02
-              </h1>
-              <h1 className="text-forestgreen font-nunito text-4xl">
-                Visão
-              </h1>
-              <p className="text-forestgreen font-nunito text-lg">
-                Ser o cantinho<br></br>favorito de quem ama<br></br>
-                abrir um livro novo e<br></br>sentir aquele<br></br>
-                cheirinho de página<br></br>fresca.
-              </p>
-            </section>
-          </section>
-
-          <section className="bg-base rounded-2xl p-8 my-12">
-            <section className="flex flex-col gap-6">
-              <h1 className="text-forestgreen font-nunito text-5xl">
-                03
-              </h1>
-              <h1 className="text-forestgreen font-nunito text-4xl">
-                Valores
-              </h1>
-              <p className="text-forestgreen font-nunito text-lg">
-                Cuidado em cada<br></br>detalhe, amor pelos<br></br>
-                livros e a crença de<br></br>que toda boa história<br></br>
-                merece um começo<br></br>especial.
-              </p>
-            </section>
-          </section>
-        </div>
-      </section>
-      {/* ---------------------------RESPONSIVIDADE--------------------------- */}
-
-      <div className="md:hidden flex items-center justify-center mb-8">
-        <p className="text-forestgreen font-nunito font-semibold text-4xl">
-          ✦ Sobre <span className="font-dancing text-5xl">Nós</span> ✦
-        </p>
-      </div>
-      <div className="md:hidden flex-col items-stretch justify-center gap-24 m-16">
-        <section className="bg-base rounded-2xl p-8 my-12">
-          <section className="flex flex-col gap-6">
-            <h1 className="text-forestgreen font-nunito text-3xl">
-              01
-            </h1>
-            <h1 className="text-forestgreen font-nunito text-2xl">
-              Missão
-            </h1>
-            <p className="text-forestgreen font-nunito text-sm">
-              Levar histórias novinhas até as mãos certas,
-              com carinho e curadoria em cada escolha.
-            </p>
-          </section>
-        </section>
-
-        <section className="bg-base rounded-2xl p-8 my-12">
-            <section className="flex flex-col gap-6">
-              <h1 className="text-forestgreen font-nunito text-3xl">
-                02
-              </h1>
-              <h1 className="text-forestgreen font-nunito text-2xl">
-                Visão
-              </h1>
-              <p className="text-forestgreen font-nunito text-sm">
+          <section className="bg-base rounded-2xl p-8">
+            <section className="flex flex-col gap-4 md:gap-6">
+              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">02</h1>
+              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Visão</h1>
+              <p className="text-forestgreen font-nunito text-sm md:text-lg">
                 Ser o cantinho favorito de quem ama
                 abrir um livro novo e sentir aquele
                 cheirinho de página fresca.
@@ -192,24 +96,20 @@ export default async function Home() {
             </section>
           </section>
 
-          <section className="bg-base rounded-2xl p-8 my-12">
-            <section className="flex flex-col gap-6">
-              <h1 className="text-forestgreen font-nunito text-3xl">
-                03
-              </h1>
-              <h1 className="text-forestgreen font-nunito text-2xl">
-                Valores
-              </h1>
-              <p className="text-forestgreen font-nunito text-sm">
+          <section className="bg-base rounded-2xl p-8">
+            <section className="flex flex-col gap-4 md:gap-6">
+              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">03</h1>
+              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Valores</h1>
+              <p className="text-forestgreen font-nunito text-sm md:text-lg">
                 Cuidado em cada detalhe, amor pelos
                 livros e a crença de que toda boa história
                 merece um começo especial.
               </p>
             </section>
           </section>
-      </div>
 
-      {/* ---------------------------RESPONSIVIDADE--fim------------------------- */}
+        </div>
+      </section>
     </main>
   );
 }
