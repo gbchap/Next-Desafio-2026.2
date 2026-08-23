@@ -15,9 +15,6 @@ export default async function GerenciamentoPage() {
 			<main className="flex-1 p-6 md:p-10">
 				<div className="flex items-center justify-between mb-8">
 					<h1 className="font-nunito font-bold text-base text-3xl">Gerenciar Produtos</h1>
-					<button className="bg-pinkish text-forestgreen font-nunito font-bold px-4 py-2 rounded-full hover:bg-base transition-colors cursor-pointer">
-						Criar Novo Produto
-					</button>
 				</div>
 				<TabelaGerenciamento produtos={produtos} />
 			</main>

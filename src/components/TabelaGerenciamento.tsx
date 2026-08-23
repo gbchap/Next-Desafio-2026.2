@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import ModalProduto from "./ModalProduto";
+import ModalExcluir from "./ModalExcluir";
 
 type Produto = {
     id: number;
@@ -13,19 +16,52 @@ type Produto = {
 };
 
 export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] }) {
-
+    const router = useRouter();
     const [produtoSelecionado, setProdutoSelecionado] = useState<Produto | null>(null);
+    const [modalAberto, setModalAberto] = useState<'criar' | 'editar' | 'excluir' | null>(null);
+    const [excluindo, setExcluindo] = useState(false);
 
-    function handleDelete(id: number) {
-        console.log("Excluir produto:", id);
+    async function confirmarExclusao() {
+        if (!produtoSelecionado) return;
+        setExcluindo(true);
+        const res = await fetch(`/api/produtos/${produtoSelecionado.id}`, { method: 'DELETE' });
+
+        if (res.ok) {
+            router.refresh();
+            setModalAberto(null);
+            setProdutoSelecionado(null);
+        } else {
+            alert("Erro ao excluir produto.");
+        }
+        setExcluindo(false);
     }
 
-    function handleEdit(id: number){
-        console.log("Editar Produto:", id);
+    async function handleDelete(produto: Produto) {
+        setProdutoSelecionado(produto);
+        setModalAberto('excluir');
+    }
+
+    function handleEdit(produto: Produto){
+        setProdutoSelecionado(produto);
+        setModalAberto('editar');
+    }
+
+    function handleCreate() {
+        setProdutoSelecionado(null);
+        setModalAberto('criar');
     }
 
     return (
         <>
+            <div className="flex justify-end mb-4">
+                <button
+                    onClick={handleCreate}
+                    className="bg-pinkish text-forestgreen font-nunito font-bold px-4 py-2 rounded-full hover:bg-base transition-colors cursor-pointer"
+                >
+                    Criar Novo Produto
+                </button>
+            </div>
+
             <div className="bg-base rounded-xl overflow-hidden">
                 <table className="w-full">
                     <thead>
@@ -61,11 +97,11 @@ export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] 
                                             className="md:hidden font-nunito font-semibold bg-green-200  text-green-900 text-xs px-3 py-1.5 rounded-sm cursor-pointer">Ver
                                         </button>
                                         <button
-                                            onClick={() => handleEdit(produto.id)}
+                                            onClick={() => handleEdit(produto)}
                                             className="hidden md:inline font-nunito font-semibold bg-blue-200 rounded-sm text-blue-600 text-sm px-3 py-1.5 hover:underline cursor-pointer">Edit
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(produto.id)}
+                                            onClick={() => handleDelete(produto)}
                                             className="hidden md:inline font-nunito font-semibold bg-red-200 rounded-sm text-red-500 text-sm px-3 py-1.5 hover:underline cursor-pointer">Delete
                                         </button>
                                     </div>
@@ -78,7 +114,7 @@ export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] 
 
             {produtoSelecionado && (
                 <div
-                    className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+                    className="md:hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
                     onClick={() => setProdutoSelecionado(null)}>
                     <div
                         className="bg-base rounded-xl p-6 w-full max-w-sm flex flex-col gap-3"
@@ -92,11 +128,11 @@ export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] 
 
                         <div className="flex gap-4 mt-2">
                             <button
-                                onClick={() => handleEdit(produtoSelecionado.id)}
+                                onClick={() => handleEdit(produtoSelecionado)}
                                 className="font-nunito bg-blue-200 rounded-sm text-blue-600 font-semibold text-sm px-3 py-1.5 hover:underline cursor-pointer">Editar
                             </button>
                             <button
-                                onClick={() => handleDelete(produtoSelecionado.id)}
+                                onClick={() => handleDelete(produtoSelecionado)}
                                 className="font-nunito bg-red-200 rounded-sm text-red-500 font-semibold text-sm px-3 py-1.5 hover:underline cursor-pointer">Excluir
                             </button>
                             <button
@@ -107,6 +143,23 @@ export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] 
                     </div>
                 </div>
             )}
+
+            {modalAberto === 'excluir' && produtoSelecionado && (
+                <ModalExcluir
+                    nomeProduto={produtoSelecionado.title}
+                    onConfirm={confirmarExclusao}
+                    onCancel={() => { setModalAberto(null); setProdutoSelecionado(null); }}
+                    carregando={excluindo}
+                />
+            )}
+
+            {(modalAberto === 'criar' || modalAberto === 'editar') && (
+                <ModalProduto
+                    produto={modalAberto === 'editar' ? produtoSelecionado : null}
+                    onClose={() => { setModalAberto(null); setProdutoSelecionado(null); }}
+                />
+            )}
+
         </>
     );  
 }

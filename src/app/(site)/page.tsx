@@ -4,8 +4,22 @@ import CarrosselLiv from "@/components/CarrosselLiv";
 import CarrosselPromo from "@/components/CarrosselPromo";
 import prisma from "@/lib/db";
 
+type CardSobre = {
+  id: number;
+  numero: string;
+  titulo: string;
+  conteudo: string;
+};
+
+async function getSobreNos() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/sobre`, { cache: 'no-store' });
+  return res.json();
+}
+
 export default async function Home() {
   const todosLivros = await prisma.product.findMany({ take: 12 });
+  const sobreNos = await getSobreNos();
 
   const livrosFormatados = todosLivros.map((produto) => ({
     id: String(produto.id),
@@ -49,7 +63,7 @@ export default async function Home() {
         />
       </div>
 
-      <div className="px-4 md:px-0 mt-12 md:mt-0">
+      <div className="px-4 md:px-0 mt-16 mb-16 md:mt-0">
         <CarrosselPromo />
       </div>
 
@@ -65,49 +79,22 @@ export default async function Home() {
 
       <section className="bg-[url('/fundorosa.png')] bg-cover bg-center bg-no-repeat py-16 md:py-24 px-4 md:px-32">
 
-        <div className="flex items-center justify-center mb-32">
+        <div className="flex items-center justify-center md:mb-24">
           <p className="text-forestgreen font-nunito font-semibold text-3xl md:text-5xl text-center">
             ✦ Sobre <span className="font-dancing text-4xl md:text-6xl">Nós</span> ✦
           </p>
         </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-8 md:gap-24 m-12">
-
-          <section className="bg-base rounded-2xl p-8">
-            <section className="flex flex-col gap-4 md:gap-6">
-              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">01</h1>
-              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Missão</h1>
-              <p className="text-forestgreen font-nunito text-sm md:text-lg">
-                Levar histórias novinhas até as mãos certas,
-                com carinho e curadoria em cada escolha.
-              </p>
+          {sobreNos.map((card: CardSobre) => (
+            <section key={card.id} className="bg-base rounded-2xl p-8 flex-1 min-h-70 md:min-h-80">
+                <section className="flex flex-col gap-4 md:gap-6">
+                    <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">{card.numero}</h1>
+                    <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">{card.titulo}</h1>
+                    <p className="text-forestgreen font-nunito text-sm md:text-lg">{card.conteudo}</p>
+                </section>
             </section>
-          </section>
-
-          <section className="bg-base rounded-2xl p-8">
-            <section className="flex flex-col gap-4 md:gap-6">
-              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">02</h1>
-              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Visão</h1>
-              <p className="text-forestgreen font-nunito text-sm md:text-lg">
-                Ser o cantinho favorito de quem ama
-                abrir um livro novo e sentir aquele
-                cheirinho de página fresca.
-              </p>
-            </section>
-          </section>
-
-          <section className="bg-base rounded-2xl p-8">
-            <section className="flex flex-col gap-4 md:gap-6">
-              <h1 className="text-forestgreen font-nunito text-3xl md:text-5xl">03</h1>
-              <h1 className="text-forestgreen font-nunito text-2xl md:text-4xl">Valores</h1>
-              <p className="text-forestgreen font-nunito text-sm md:text-lg">
-                Cuidado em cada detalhe, amor pelos
-                livros e a crença de que toda boa história
-                merece um começo especial.
-              </p>
-            </section>
-          </section>
-
+          ))}
         </div>
       </section>
     </main>
