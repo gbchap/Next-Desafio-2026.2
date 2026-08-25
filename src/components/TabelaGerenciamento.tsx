@@ -53,7 +53,7 @@ export default function TabelaGerenciamento({ produtos }: { produtos: Produto[] 
 
     return (
         <>
-            <div className="flex justify-end mb-4">
+            <div className="flex md:justify-end justify-center mb-4">
                 <button
                     onClick={handleCreate}
                     className="bg-pinkish text-forestgreen font-nunito font-bold px-4 py-2 rounded-full hover:bg-base transition-colors cursor-pointer"

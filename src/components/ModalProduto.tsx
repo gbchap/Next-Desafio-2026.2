@@ -128,7 +128,7 @@ export default function ModalProduto({
                             type="file"
                             accept="image/*"
                             onChange={handleImageChange}
-                            className="font-nunito text-forestgreen text-sm"
+                            className="font-nunito text-pink-900 text-sm hover:file:underline hover:file:cursor-pointer"
                         />
                         {preview && (
                             <img src={preview} alt="Preview" className="w-24 h-32 object-cover rounded-md" />
