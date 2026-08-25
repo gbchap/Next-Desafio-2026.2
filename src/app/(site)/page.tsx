@@ -3,25 +3,12 @@ import Link from 'next/link';
 import CarrosselLiv from "@/components/CarrosselLiv";
 import CarrosselPromo from "@/components/CarrosselPromo";
 import prisma from "@/lib/db";
+import { getSobreNos, type CardSobre } from "@/lib/sobre";
 
-type CardSobre = {
-  id: number;
-  numero: string;
-  titulo: string;
-  conteudo: string;
-};
-
-async function getSobreNos() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
-  const res = await fetch(`${baseUrl}/api/sobre`, { cache: 'no-store' });
-  return res.json();
-}
 
 export default async function Home() {
   const todosLivros = await prisma.product.findMany({ take: 12 });
-  const sobreNos = await getSobreNos();
+  const sobreNos = getSobreNos();
 
   const livrosFormatados = todosLivros.map((produto) => ({
     id: String(produto.id),
