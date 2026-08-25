@@ -2,6 +2,7 @@ import ProdutoCard from "@/components/ProdutoCard";
 import BotaoCarrinho from "@/components/BotaoCarrinho";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import prisma from "@/lib/db";
 
 
 export default async function ProdutoPage({
