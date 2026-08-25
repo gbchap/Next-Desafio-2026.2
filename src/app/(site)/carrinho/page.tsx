@@ -19,7 +19,7 @@ export default function CarrinhoPage() {
     return (
         <section className="bg-[url('/fundorosa.png')] bg-cover bg-center bg-no-repeat bg-fixed pb-24 min-h-screen py-16 px-6 md:px-24">
             <div className="flex items-center justify-between mb-8">
-                <h1 className="font-nunito font-bold text-softgreen text-5xl mb-8">Meu Carrinho</h1>
+                <h1 className="font-nunito font-bold text-softgreen text-5xl mb-8">Meu Carrinho:</h1>
                 <p className="font-nunito text-forestgreen text-xl">{totalItens} {totalItens === 1 ? "item" : "itens"}</p>
             </div>
 
