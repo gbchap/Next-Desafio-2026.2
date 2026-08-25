@@ -12,7 +12,9 @@ type CardSobre = {
 };
 
 async function getSobreNos() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
   const res = await fetch(`${baseUrl}/api/sobre`, { cache: 'no-store' });
   return res.json();
 }
